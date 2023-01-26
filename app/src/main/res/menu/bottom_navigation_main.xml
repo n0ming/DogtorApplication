@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_care"
+        android:icon="@drawable/calender"
+        android:enabled="true"
+        android:title="케어"/>
+    <item
+        android:id="@+id/action_explore"
+        android:icon="@drawable/search"
+        android:enabled="true"
+        android:title="병원찾기"/>
+    <item
+        android:id="@+id/action_community"
+        android:icon="@drawable/community"
+        android:enabled="true"
+        android:title="커뮤니티"/>
+    <item
+        android:id="@+id/action_user"
+        android:icon="@drawable/mypage"
+        android:enabled="true"
+        android:title="마이페이지" />
+</menu>

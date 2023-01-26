@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329804926304",
+    "project_id": "dogtor-application",
+    "storage_bucket": "dogtor-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329804926304:android:5271b051858d5f230fa205",
+        "android_client_info": {
+          "package_name": "com.example.dogtorapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329804926304-9akvrg9fgpkdfrhg8sql0dklqir0od6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7d2zsBR-NO80uEANCDcffLUdV-YmKeCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329804926304-9akvrg9fgpkdfrhg8sql0dklqir0od6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
