@@ -156,7 +156,7 @@ class WriteFragment : Fragment() {
                     }
                 }
             } }
-
+//가지ㅣㅓㄱ
     }
 
     // 스토리지에 이미지 업로드하는 함수
