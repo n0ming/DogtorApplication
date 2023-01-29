@@ -1,17 +1,21 @@
 package com.example.dogtorapplication
 
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogtorapplication.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.item_calendar_body.*
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener   {
+    //DB 변수
+    lateinit var database: SQLiteDatabase
 
     // 뷰 바인딩을 위한 객체 획득
     lateinit var binding: ActivityMainBinding
@@ -19,9 +23,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     // 파이어 베이스에 데이터 저장을 위한 객체 획득
     private lateinit var auth: FirebaseAuth
     var Firestore : FirebaseFirestore?=null
-
-    // 프래그먼트 제어를 위한 객체 받아오기
-    val fragmentmanger: FragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +35,10 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         auth = FirebaseAuth.getInstance()
         Firestore = FirebaseFirestore.getInstance()
 
-        // 제일 처음 띄울 프래그먼트
+        val fragmentmanger: FragmentManager = supportFragmentManager
         val carefragment = CareFragment()
-        // 프래그먼트 제어를 위한 객체 받아오기
         val transaction = fragmentmanger.beginTransaction()
 
-        // 프래그먼트
         transaction.add(R.id.main_content, carefragment)
         transaction.commit()
 
@@ -59,18 +58,37 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         // 바텀 네비게이션과 바인딩하여
         binding.bottomNavigation.setOnItemSelectedListener(this)
+
+        //DB 준비
+        /*dbHelper = MyDBHelper(this, "mydb.db", null, 1)
+        val adapter = TodoAdapter()
+
+        val memos = dbHelper.selectMemo()
+        adapter.listDate.addAll(memos)
+        recycleView2.adapter = adapter
+        recycleView2.layoutManager = LinearLayoutManager(this)*/
+        /*database = dbHelper.writableDatabase
+
+        //
+        val memo = Memo(1,1,"내용",120123)
+        dbHelper.insertMemo()*/
+
     }
 
     override fun onNavigationItemSelected(p0 : MenuItem): Boolean { // 바텀 네비게이션 클릭 시 이동
         when(p0.itemId){
             R.id.action_care->{
-                var careFragment = CareFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,careFragment).commit()
+                var calendarFragment = CareFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
+
+                //var calendarFragment = CalendarFragment()
+                //supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
                 return true
             }
             R.id.action_explore->{
                 var exploreFragment = ExploreFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,exploreFragment).commit()
+
                 return true
             }
 
@@ -88,5 +106,21 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return false
     }
 
+    // 글쓰기 버튼 클릭 시 fragment 화면 전환을 위한 함수
+    fun changeFragment(index: Int){
+        when(index){
+            1 -> {
+                var communityFragment = CommunityFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.main_content,communityFragment).commit()
+            }
+
+            2 -> {
+                var writeFragment = WriteFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.main_content,writeFragment).commit()
+            }
+        }
+    }
+
+    //
 
 }
