@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.dogtorapplication.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     private lateinit var auth: FirebaseAuth
     var Firestore : FirebaseFirestore?=null
 
+    // 프래그먼트 제어를 위한 객체 받아오기
+    val fragmentmanger: FragmentManager = supportFragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,6 +33,15 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         // 회원 정보 저장을 위한 변수 선언
         auth = FirebaseAuth.getInstance()
         Firestore = FirebaseFirestore.getInstance()
+
+        // 제일 처음 띄울 프래그먼트
+        val carefragment = CareFragment()
+        // 프래그먼트 제어를 위한 객체 받아오기
+        val transaction = fragmentmanger.beginTransaction()
+
+        // 프래그먼트
+        transaction.add(R.id.main_content, carefragment)
+        transaction.commit()
 
         // 정보 저장
         if(true)
@@ -57,7 +71,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             R.id.action_explore->{
                 var exploreFragment = ExploreFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,exploreFragment).commit()
-
                 return true
             }
 
@@ -75,19 +88,5 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return false
     }
 
-    // 글쓰기 버튼 클릭 시 fragment 화면 전환을 위한 함수
-    fun changeFragment(index: Int){
-        when(index){
-            1 -> {
-                var communityFragment = CommunityFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,communityFragment).commit()
-            }
-
-            2 -> {
-                var writeFragment = WriteFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,writeFragment).commit()
-            }
-        }
-    }
 
 }

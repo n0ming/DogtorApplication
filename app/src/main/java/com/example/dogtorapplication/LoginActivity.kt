@@ -76,11 +76,11 @@ class LoginActivity : AppCompatActivity() {
                             moveMainPage(task.result?.user) // moveMainPage 함수를 통해 메인 화면으로 넘어가기
 
                         } else {
-                            Toast.makeText(this,"구글 로그인 실패", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this,task.exception?.message, Toast.LENGTH_LONG).show()
                         }
                     }
             } catch (e: ApiException) {
-                Toast.makeText(this,"구글 로그인 실패", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,task.exception?.message, Toast.LENGTH_LONG).show()
 
 
             }
@@ -105,10 +105,11 @@ class LoginActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if(account!==null){ // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
+        if(account!==null){ // 이미 로그인 되어있을 시 바로 메인 액티비티로 이동
             moveMainPage(auth.currentUser)
         }
     }
+
     // 로그인 시에 불러 로그인되도록 하는 함수
     fun signin(){
         // signInWithEmailAndPassword() 이용하여 로그인 가능하도록 설정

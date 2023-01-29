@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="10dp"
-    android:paddingTop="20dp"
+    android:paddingBottom="10dp"
     android:paddingRight="10dp">
 
     <View
@@ -21,10 +21,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="카테고리"
+        android:textColor="#5FA8D3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        android:textColor="#5FA8D3"/>
+        app:layout_constraintTop_toBottomOf="@+id/view2"/>
 
+    <TextView
+        android:id="@+id/localTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="지역"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/categoryTextView"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="0dp"
@@ -42,70 +53,23 @@
         app:layout_constraintTop_toBottomOf="@+id/categoryTextView" />
 
     <TextView
-        android:id="@+id/reviewersTextView"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
-        android:maxLength="3"
-        android:text="작성자"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
         android:text="MM.dd hh:mm"
-        app:layout_constraintBottom_toBottomOf="@+id/reviewersTextView"
-        app:layout_constraintStart_toEndOf="@+id/reviewersTextView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/noimages"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/comments_box"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/comments_box"
-        android:layout_width="34dp"
-        android:layout_height="54dp"
-        android:background="#F3F3F3"
-        android:orientation="vertical"
-        android:padding="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/commentsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="00"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="댓글"
-            android:textAlignment="center"
-            android:textSize="10sp" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

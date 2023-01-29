@@ -26,9 +26,7 @@ class myinformation : AppCompatActivity() {
             finish()
         }
 
-        password_change.setOnClickListener {
-            findPassword()
-        }
+
 
         retouch.setOnClickListener {
 
@@ -139,15 +137,5 @@ class myinformation : AppCompatActivity() {
         }
 
     }
-        // 비밀번호 찾기
-        // sendPasswordResetEmail()로 이메일 전송
-        fun findPassword(){
-            FirebaseAuth.getInstance().sendPasswordResetEmail(tv2.text.toString()).addOnCompleteListener { task ->
-                if(task.isSuccessful){ // 성공 시
-                    Toast.makeText(this, "비밀번호 변경 메일을 전송했습니다", Toast.LENGTH_LONG).show()
-                }else{ // 실패 시시
-                    Toast.makeText(this, task.exception.toString(), Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+
 }
