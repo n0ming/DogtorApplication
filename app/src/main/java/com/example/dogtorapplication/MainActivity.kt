@@ -1,15 +1,21 @@
 package com.example.dogtorapplication
 
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogtorapplication.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.item_calendar_body.*
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener   {
+    //DB 변수
+    lateinit var database: SQLiteDatabase
 
     // 뷰 바인딩을 위한 객체 획득
     lateinit var binding: ActivityMainBinding
@@ -29,6 +35,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         auth = FirebaseAuth.getInstance()
         Firestore = FirebaseFirestore.getInstance()
 
+        val fragmentmanger: FragmentManager = supportFragmentManager
+        val carefragment = CareFragment()
+        val transaction = fragmentmanger.beginTransaction()
+
+        transaction.add(R.id.main_content, carefragment)
+        transaction.commit()
+
         // 정보 저장
         if(true)
         {
@@ -45,13 +58,31 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         // 바텀 네비게이션과 바인딩하여
         binding.bottomNavigation.setOnItemSelectedListener(this)
+
+        //DB 준비
+        /*dbHelper = MyDBHelper(this, "mydb.db", null, 1)
+        val adapter = TodoAdapter()
+
+        val memos = dbHelper.selectMemo()
+        adapter.listDate.addAll(memos)
+        recycleView2.adapter = adapter
+        recycleView2.layoutManager = LinearLayoutManager(this)*/
+        /*database = dbHelper.writableDatabase
+
+        //
+        val memo = Memo(1,1,"내용",120123)
+        dbHelper.insertMemo()*/
+
     }
 
     override fun onNavigationItemSelected(p0 : MenuItem): Boolean { // 바텀 네비게이션 클릭 시 이동
         when(p0.itemId){
             R.id.action_care->{
-                var careFragment = CareFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,careFragment).commit()
+                var calendarFragment = CareFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
+
+                //var calendarFragment = CalendarFragment()
+                //supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
                 return true
             }
             R.id.action_explore->{
@@ -89,5 +120,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             }
         }
     }
+
+    //
 
 }
