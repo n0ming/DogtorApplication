@@ -96,9 +96,11 @@ class CareFragment : DialogFragment(), OnItemListener {
         val v2: View = inflater.inflate(R.layout.item_calendar_body, container, false)
         val item_calendar_body = inflater.inflate(R.layout.item_calendar_body, container, false)
         val layout_todo = inflater.inflate(R.layout.layout_todo, container, false)
+
         //val aaa = inflater.inflate(R.layout.test,container,false)
         monthYearText = v2.findViewById<TextView>(R.id.monthYearText) as TextView
         recyclerView = v2.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
+
         //recyclerView2 = v2.findViewById<RecyclerView>(R.id.recycleView2)as RecyclerView
         //db 할때 사용할 것들들
         todoList = layout_todo.findViewById(R.id.todoList)
