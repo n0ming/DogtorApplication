@@ -106,21 +106,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return false
     }
 
-    // 글쓰기 버튼 클릭 시 fragment 화면 전환을 위한 함수
-    fun changeFragment(index: Int){
-        when(index){
-            1 -> {
-                var communityFragment = CommunityFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,communityFragment).commit()
-            }
 
-            2 -> {
-                var writeFragment = WriteFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,writeFragment).commit()
-            }
-        }
-    }
-
-    //
 
 }
