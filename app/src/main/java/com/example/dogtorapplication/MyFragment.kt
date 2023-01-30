@@ -8,9 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_myinformation.*
-import kotlinx.android.synthetic.main.fragment_my.*
 import kotlinx.android.synthetic.main.fragment_my.view.*
 
 class MyFragment : Fragment() {
@@ -40,8 +37,11 @@ class MyFragment : Fragment() {
         view.logo.setOnClickListener {
             mActivity.transaction(1)
         }
-        view.mydog.setOnClickListener {
-            mActivity.transaction(2)
+
+        // 강아지 수술 등록
+        view.mydogimageView.setOnClickListener {
+            val intent = Intent(activity, MydogActivity::class.java)
+            startActivity(intent)
         }
 
         myInf.setOnClickListener {// 내정보 버튼 클릭 시 이동

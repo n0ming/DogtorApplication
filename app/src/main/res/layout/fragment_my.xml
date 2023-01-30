@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/mydog"
+        android:id="@+id/mydogimageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -71,6 +71,7 @@
         android:textSize="23dp"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@id/tv_userEmail" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="30dp"

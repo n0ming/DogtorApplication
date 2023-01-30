@@ -3,4 +3,5 @@
 
     <dimen name="mcv_arrow_padding">14dp</dimen>
     <dimen name="mcv_arrow_margin">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

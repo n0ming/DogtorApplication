@@ -14,9 +14,6 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.fragment_community.view.*
-import kotlinx.android.synthetic.main.fragment_community.view.logo
-import kotlinx.android.synthetic.main.fragment_my.view.*
 
 class CommunityFragment : Fragment() {
 

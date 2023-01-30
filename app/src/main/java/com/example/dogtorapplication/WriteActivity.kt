@@ -109,7 +109,7 @@ class WriteActivity : AppCompatActivity() {
     private fun saveStore(){
         // 파이어 베이스에 글을 저장하기 위해 호출되는 함수
 
-        // 회원의 지역 정보 가져오기
+        // 회원의 정보 가져오기
         db.collection("userplus")
             .whereEqualTo("userID",auth.uid.toString())
             .get()
@@ -119,7 +119,7 @@ class WriteActivity : AppCompatActivity() {
 
                     // 저장할 데이터
                     val data = mapOf(
-                        "userID" to userDTO.local.toString(),
+                        "userID" to userDTO.userID.toString(),
                         "local" to userDTO.local.toString(), // 지역
                         "name" to userDTO.userName.toString(), // 이름
                         "title" to binding.etTitle.text.toString(), // 글 제목

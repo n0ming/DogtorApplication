@@ -55,6 +55,7 @@ class myinformation : AppCompatActivity() {
             var edit1 = v1.findViewById<EditText>(R.id.editText)
             var edit2 = v1.findViewById<EditText>(R.id.editText2)
             var edit3 = v1.findViewById<EditText>(R.id.editText3)
+            var edit4 = v1.findViewById<EditText>(R.id.editText4)
 
             // users 컬랙션 가져오기
             Firestore?.collection("userplus")
@@ -86,6 +87,15 @@ class myinformation : AppCompatActivity() {
                         edit3.setText(userDTO?.local)
 
                     }
+
+                    // 거주지 칸 정보
+                    if (userDTO?.dogName == null){
+                        edit4.setHint("강아지 이름을 입력해주세요")
+                    }else{
+                        edit4.setText(userDTO?.dogName)
+
+                    }
+
                 }
             }
 
@@ -97,10 +107,11 @@ class myinformation : AppCompatActivity() {
                 var edit1: EditText? = alert.findViewById<EditText>(R.id.editText)
                 var edit2: EditText? = alert.findViewById<EditText>(R.id.editText2)
                 var edit3: EditText? = alert.findViewById<EditText>(R.id.editText3)
+                var edit4: EditText? = alert.findViewById<EditText>(R.id.editText4)
 
                 var userInfo = userplusImformation() // 데이터 구조
 
-                if (edit1?.text.toString() =="" || edit2?.text.toString()=="" || edit3?.text.toString()=="" ){ // 내용이 입력되지 않았다면
+                if (edit1?.text.toString() =="" || edit2?.text.toString()=="" || edit3?.text.toString()==""|| edit4?.text.toString()=="" ){ // 내용이 입력되지 않았다면
                     Toast.makeText(this, "내용을 전부 입력해주세요", Toast.LENGTH_LONG).show()
                 }
                 else{ // 내용이 입력되었다면
@@ -110,6 +121,8 @@ class myinformation : AppCompatActivity() {
                     userInfo.phoneNumber="${edit1?.text}"
                     userInfo.userName="${edit2?.text}"
                     userInfo.local="${edit3?.text}"
+                    userInfo.dogName="${edit4?.text}"
+
                     Firestore?.collection("userplus")
                         ?.document(auth?.uid.toString())
                         ?.set(userInfo)
@@ -153,6 +166,11 @@ class myinformation : AppCompatActivity() {
                 // 거주지 설정
                 if (userDTO?.local != null){
                     tv8.text=userDTO?.local
+                }
+
+                // 강아지 이름 설정
+                if (userDTO?.dogName != null){
+                    tv10.text=userDTO?.dogName
                 }
             }
         }
