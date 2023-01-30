@@ -5,6 +5,7 @@ import Todoupdate
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogtorapplication.CalendarUtil.selectedDate
 import kotlinx.android.synthetic.main.fragment_community.view.*
 import kotlinx.android.synthetic.main.item_calendar_body.*
+import kotlinx.android.synthetic.main.item_calendar_body.view.*
 import kotlinx.android.synthetic.main.layout_todo.*
 import kotlinx.android.synthetic.main.list_item.*
 import kotlinx.android.synthetic.main.todo_add.*
@@ -151,7 +153,6 @@ class CareFragment : DialogFragment(), OnItemListener {
         val button = view.findViewById<ImageButton>(R.id.todo_out_btn)
         var listscrollBtn = view.findViewById<ImageButton>(R.id.listscroll)
         var plusBtn = view.findViewById<ImageButton>(R.id.plus_btn)
-        var updateBtn = view.findViewById<ImageButton>(R.id.update_btn)
         selectedDate = LocalDate.now()
         // 띄우는 창 레이아웃 연결
         setMonthView()
@@ -161,15 +162,14 @@ class CareFragment : DialogFragment(), OnItemListener {
             setTodoView()
         }
 
+        view.transaction.setOnClickListener {
+            val intent = Intent(activity, MydogActivity::class.java)
+            startActivity(intent)
+        }
         plusBtn.setOnClickListener {
             val dialog = CustomDialog(ct!!)
             // Custom Dialog 표시
             dialog.showDialog(false,0)
-        }
-        updateBtn.setOnClickListener {
-            val dialog = CustomDialog(ct!!)
-            // Custom Dialog 표시
-            dialog.showDialog(true, Todoupdate().num!!+1)
         }
 
         //클릭해도 onclick 안되고 여기서 되면 dialog 바로 등장 시키고 수정뒤 ...

@@ -12,16 +12,17 @@
             android:layout_width="match_parent"
             android:layout_height="680dp">
             <ImageView
-                android:id="@id/logo"
+                android:id="@+id/logo"
                 android:layout_width="112dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/logo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
+                android:id="@+id/transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -153,7 +154,9 @@
                 android:layout_marginRight="20dp"
                 android:layout_gravity="top"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></androidx.recyclerview.widget.RecyclerView>
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/textView3"
@@ -209,19 +212,7 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/update_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/floating_pen"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/plus_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/white" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plus_btn"
