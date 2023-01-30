@@ -163,7 +163,8 @@ class CareFragment : DialogFragment(), OnItemListener {
         val button = view.findViewById<ImageButton>(R.id.todo_out_btn)
         var listscrollBtn = view.findViewById<ImageButton>(R.id.listscroll)
         var plusBtn = view.findViewById<ImageButton>(R.id.plus_btn)
-
+        var prevBtn = view.findViewById<ImageButton>(R.id.prevBtn)
+        var nextBtn = view.findViewById<ImageButton>(R.id.nextBtn)
 
         selectedDate = LocalDate.now()
         // 띄우는 창 레이아웃 연결
@@ -179,6 +180,14 @@ class CareFragment : DialogFragment(), OnItemListener {
             val dialog = CustomDialog(ct!!)
             // Custom Dialog 표시
             dialog.showDialog(false,0,0)
+        }
+        nextBtn.setOnClickListener {
+            selectedDate = selectedDate?.plusMonths(1)
+            setMonthView()
+        }
+        prevBtn.setOnClickListener {
+            selectedDate = selectedDate?.minusMonths(1)
+            setMonthView()
         }
         /*updateBtn?.setOnClickListener {
             val dialog = CustomDialog(ct!!)
