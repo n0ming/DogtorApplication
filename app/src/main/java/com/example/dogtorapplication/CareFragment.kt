@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogtorapplication.CalendarUtil.selectedDate
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_myinformation.*
 import kotlinx.android.synthetic.main.fragment_community.view.*
 import kotlinx.android.synthetic.main.item_calendar_body.*
 import kotlinx.android.synthetic.main.layout_todo.*
@@ -41,7 +43,10 @@ var gotomain : Boolean = false
 val java = yearmothday()
 var input : String? = ""
 var dbHelper : MyDBHelper ?=null
+var dotHelper : DotDBHelper ?=null
 var listsize : Int? =0
+var view2 : View? = null
+
 class CareFragment : DialogFragment(), OnItemListener {
     var aa : Boolean = false
     val java1 = yearmothday()
@@ -57,20 +62,21 @@ class CareFragment : DialogFragment(), OnItemListener {
     var purple : ImageButton? =null
     var pink : ImageButton? =null
 
-
     var recyclerView2: RecyclerView? = null
+    var recyclerView3: RecyclerView?=null
     var monthYearText: TextView? = null
     var nolist : TextView? =null
 
     //var selectedDate : LocalDate? =null
     //val mActivity = activity as MainActivity
     var ct: Context? = null
+    var updateBtn : FloatingActionButton? = null
 
     //db
     //lateinit var dbHelper: MyDBHelper
     lateinit var database: SQLiteDatabase
     //private lateinit var binding: CareFragment
-
+    var checkInt : Int? =0
     //db로 삽입해야하는 것들
     lateinit var todoList : TextView
     lateinit var rectangle : ImageView
@@ -93,14 +99,15 @@ class CareFragment : DialogFragment(), OnItemListener {
         ct = container?.getContext();
         val v1: View = inflater.inflate(R.layout.todo_add, container, false)
         val button = v1.findViewById<ImageButton>(R.id.todo_out_btn) as ImageButton
-        val v2: View = inflater.inflate(R.layout.item_calendar_body, container, false)
+        val v2 = inflater.inflate(R.layout.item_calendar_body, container, false)
+        //v2!!.findViewById<FloatingActionButton>(R.id.update_btn).setVisibility(View.VISIBLE)
         val item_calendar_body = inflater.inflate(R.layout.item_calendar_body, container, false)
         val layout_todo = inflater.inflate(R.layout.layout_todo, container, false)
-
+        val v3 : View = inflater.inflate(R.layout.calendar_cell,container,false)
         //val aaa = inflater.inflate(R.layout.test,container,false)
-        monthYearText = v2.findViewById<TextView>(R.id.monthYearText) as TextView
-        recyclerView = v2.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-
+        monthYearText = v2?.findViewById<TextView>(R.id.monthYearText) as TextView
+        recyclerView = v2?.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
+        recyclerView3 = v3.findViewById(R.id.recyclerView3) as RecyclerView
         //recyclerView2 = v2.findViewById<RecyclerView>(R.id.recycleView2)as RecyclerView
         //db 할때 사용할 것들들
         todoList = layout_todo.findViewById(R.id.todoList)
@@ -113,6 +120,8 @@ class CareFragment : DialogFragment(), OnItemListener {
         bluepurple = layout_todo.findViewById(R.id.color_red)
         purple = layout_todo.findViewById(R.id.color_red)
         pink = layout_todo.findViewById(R.id.color_red)
+
+
 /*
         myHelper = MyDBHelper(ct!!,"groupDo",1)
         adapter = TodoAdapter()
@@ -139,22 +148,27 @@ class CareFragment : DialogFragment(), OnItemListener {
         }*/
         return inflater.inflate(R.layout.item_calendar_body, container, false)
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         nolist = view.findViewById<TextView>(R.id.nolist)
         monthYearText = view.findViewById(R.id.monthYearText)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView2 = view.findViewById<RecyclerView>(R.id.recycleView2)
+        //recyclerView3 = view.findViewById(R.id.recyclerView3)
         val button = view.findViewById<ImageButton>(R.id.todo_out_btn)
         var listscrollBtn = view.findViewById<ImageButton>(R.id.listscroll)
         var plusBtn = view.findViewById<ImageButton>(R.id.plus_btn)
-        var updateBtn = view.findViewById<ImageButton>(R.id.update_btn)
+
+
         selectedDate = LocalDate.now()
         // 띄우는 창 레이아웃 연결
         setMonthView()
+        Log.d("메모", "set here7")
 
         listscrollBtn.setOnClickListener {
             dbHelper = MyDBHelper(ct, Main().input2)
@@ -164,9 +178,9 @@ class CareFragment : DialogFragment(), OnItemListener {
         plusBtn.setOnClickListener {
             val dialog = CustomDialog(ct!!)
             // Custom Dialog 표시
-            dialog.showDialog(false,0)
+            dialog.showDialog(false,0,0)
         }
-        updateBtn.setOnClickListener {
+        /*updateBtn?.setOnClickListener {
             val dialog = CustomDialog(ct!!)
             // Custom Dialog 표시
             dialog.showDialog(true, Todoupdate().num!!+1)
@@ -178,10 +192,13 @@ class CareFragment : DialogFragment(), OnItemListener {
             val dialog = CustomDialog(ct!!)
             // Custom Dialog 표시
             dialog.showDialog(false,0)
-        }
+        }*/
+
 
     }
-
+    fun visi(){
+        updateBtn?.setVisibility(View.VISIBLE)
+    }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun monthYearFromDate(date: LocalDate?): String {
         val formatter = DateTimeFormatter.ofPattern("MM월 yyyy")
@@ -227,11 +244,57 @@ class CareFragment : DialogFragment(), OnItemListener {
             GridLayoutManager(ct, 7)//GridLayoutManager(applicationContext, 7)
         recyclerView!!.layoutManager = manager
         recyclerView!!.adapter = adapter
+        dotHelper = DotDBHelper(ct, "2023년 01월2일DOT")
+        setDotView()
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setid(id : Int){
+        if(id==1) {
+            val dialog = CustomDialog(ct!!)
+            // Custom Dialog 표시
+            dialog.showDialog(true, Todoupdate().num!! , 1)
+        } else if(id==2){
+            val dialog = CustomDialog(ct!!)
+            dbHelper = MyDBHelper(ct, Main().input2)
+            Log.d("num", "${Todoupdate().num!! }")
+            dbHelper!!.deleteMemo(Todoupdate().num!! )
+            Log.d("num2", "${Todoupdate().num!! }")
+            var adapter = TodoAdapter(this@CareFragment)
+            var memos = dbHelper!!.selectMemo()
+            Log.d("메모", "set here")
+            adapter.listDate.addAll(memos)
+            Log.d("메모", "set here2")
+            recycleView2.adapter = adapter
+            Log.d("메모", "set here3")
+            recycleView2.layoutManager = GridLayoutManager(ct,1)
+            //Log.d("메모", "content here4")
+            adapter.listDate.clear()
+            adapter.listDate.addAll(dbHelper!!.selectMemo())
+            adapter.notifyDataSetChanged()
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setDotView(){
+        val dayList = daysInMonthArray(selectedDate)
+        val adapter = DotAdapter(dayList)
+        var memos = dotHelper!!.selectMemo()
+        Log.d("메모", "set here")
+        adapter.listdot.addAll(memos)
+        Log.d("메모", "set here2")
+        listsize= adapter.listdot.size
+        Log.d("메모", "set here3")
+        val manager: RecyclerView.LayoutManager =
+            GridLayoutManager(ct, 3)
+        Log.d("메모", "set here4")
+        recyclerView3!!.layoutManager = manager
+        Log.d("메모", "set here5")
+        recyclerView3!!.adapter = adapter
+        Log.d("메모", "set here6")
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setTodoView() {
-        var adapter = TodoAdapter()
+        var adapter = TodoAdapter(this)
         var memos = dbHelper!!.selectMemo()
         Log.d("메모", "set here")
         adapter.listDate.addAll(memos)
@@ -269,6 +332,7 @@ class CareFragment : DialogFragment(), OnItemListener {
 
     inner class CustomDialog(context: Context) {
         private lateinit var onItemListener: OnItemListener
+        private lateinit var list_onclick_interface : list_onclick_interface
         private lateinit var binding: CustomDialog
         private val dialog = Dialog(context)
         private lateinit var onClickListener: OnDialogClickListener
@@ -285,7 +349,7 @@ class CareFragment : DialogFragment(), OnItemListener {
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun showDialog(run : Boolean, num : Int) {
+        fun showDialog(run : Boolean, num : Int, num2 : Int) {
             //color 저장
             var color: Int = 1
             //클릭된 날짜로 변경
@@ -299,8 +363,25 @@ class CareFragment : DialogFragment(), OnItemListener {
             if (text != null) {
                 java.setMonth(text.substring(6 until 8))
             }
+            if(num2==0){
+                dialog.setContentView(R.layout.todo_add)
+            }
+            if(num2==1){
+                dialog.setContentView(R.layout.todo_fix)
+                if(run){
+                    var a : String= dbHelper!!.selectText(num)
+                    var b : String= dbHelper!!.selectText2(num)
+                    var c : Int = dbHelper!!.selectColor(num)
+                    colorfixdialogret(c)
+                    Log.d("text","$a")
+                    dialog.editMemo.setText(a)
+                    dialog.editMemo2.setText(b)
+                }
+            }
+            if(num2==2){
+                dbHelper!!.deleteMemo(num)
+            }
 
-            dialog.setContentView(R.layout.todo_add)
             dialog.window!!.setLayout(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
@@ -319,11 +400,11 @@ class CareFragment : DialogFragment(), OnItemListener {
             text = java.getYear() + "." + java.getMonth() + "." + java.getDay()
             //클릭 날짜로 텍스트 변경
             dialog.click_day.text = java.getYear() + "." + java.getMonth() + "." + java.getDay()
-            if(run){
+            /*if(run){
                 var a : String= dbHelper!!.selectText(num)
                 Log.d("text","$a")
                 dialog.editMemo.setText(a)
-            }
+            }*/
             dialog.show()
 
             dialog.todo_out_btn.setOnClickListener {
@@ -333,31 +414,36 @@ class CareFragment : DialogFragment(), OnItemListener {
             }
 
             dialog.todo_add_btn.setOnClickListener {
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)?.setVisibility(View.VISIBLE)
-                /* val recycleView2: RecyclerView? =
-                    item_calendar_body?.findViewById(R.id.recycleView2)
-                val dbHelper = MyDBHelper(ct, "mydb.db", 1)
-                val adapter: TodoAdapter = TodoAdapter()
+                var dottable = Main().input2+"DOT"
+                dotHelper = DotDBHelper(ct, dottable)
+                val memo = CheckMemo(null, color)
+                dotHelper!!.insertMemo(memo)
+                val dayList = daysInMonthArray(selectedDate)
+                val dotadpater = DotAdapter(dayList)
+                var dotmemos = dotHelper!!.selectMemo()
+                dotadpater.listdot.addAll(dotmemos)
+                recyclerView3?.adapter = dotadpater
+                recyclerView3?.layoutManager = GridLayoutManager(ct,3)
+                //Calendar().buf_view2?.findViewById<RecyclerView>(R.id.recyclerView3).
 
-                val memos = dbHelper.selectMemo()
-                adapter.lisData.addAll(memos)
-                recycleView2?.adapter = adapter
-                recycleView2?.layoutManager = LinearLayoutManager(ct)
-
-                val editMemo: EditText? = layout_todo?.findViewById(R.id.editMemo)
-                */
                 Log.d("DBTABLE", "${Main().input2}")
                 dbHelper = MyDBHelper(ct, Main().input2)
                 val content = dialog.editMemo.text.toString()
+                val content2 = dialog.editMemo2.text.toString()
+                val check = 1
                 Log.d("메모", "content!!!!!!! = $content")
                 if (content.isNotEmpty()) {
-                    val memo = Memo(null, color, content)
+                    val memo = Memo(null, color, content,content2)
                     Log.d("메모", "memo is inserted")
                     Log.d("메모", "helper is not empty, content!!!!!!! = $dbHelper")
-                    dbHelper!!.insertMemo(memo)
+                    if(run){
+                        dbHelper!!.updateMemo(memo,num)
+                    } else {
+                        dbHelper!!.insertMemo(memo)
+                    }
                     Log.d("메모", "content is not empty")
                 }
-                var adapter = TodoAdapter()
+                var adapter = TodoAdapter(this@CareFragment)
                 var memos = dbHelper!!.selectMemo()
                 Log.d("메모", "set here")
                 adapter.listDate.addAll(memos)
@@ -366,7 +452,9 @@ class CareFragment : DialogFragment(), OnItemListener {
                 Log.d("메모", "set here3")
                 recycleView2.layoutManager = GridLayoutManager(ct,1)
                 //Log.d("메모", "content here4")
-
+                adapter.listDate.clear()
+                adapter.listDate.addAll(dbHelper!!.selectMemo())
+                adapter.notifyDataSetChanged()
                 nolist!!.setVisibility(View.GONE)
 
                 dialog.dismiss()
@@ -374,58 +462,78 @@ class CareFragment : DialogFragment(), OnItemListener {
             dialog.color_red.setOnClickListener {
                 dialogret()
                 color = 1
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round)*/
                 dialog.color_red.setBackgroundResource(R.drawable.group_57)
             }
             dialog.color_orange.setOnClickListener {
                 dialogret()
                 color = 2
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_orange)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_orange)*/
                 dialog.color_orange.setBackgroundResource(R.drawable.group_58)
             }
             dialog.color_blue.setOnClickListener {
                 dialogret()
                 color = 5
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_blue)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_blue)*/
                 dialog.color_blue.setBackgroundResource(R.drawable.group_61)
             }
             dialog.color_blue_purple.setOnClickListener {
                 dialogret()
                 color = 6
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_bluepurple)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_bluepurple)*/
                 dialog.color_blue_purple.setBackgroundResource(R.drawable.group_62)
             }
             dialog.color_green.setOnClickListener {
                 dialogret()
                 color = 4
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_green)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_green)*/
                 dialog.color_green.setBackgroundResource(R.drawable.group_60)
             }
             dialog.color_pink.setOnClickListener {
                 dialogret()
                 color = 8
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_pink)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_pink)*/
                 dialog.color_pink.setBackgroundResource(R.drawable.group_56)
             }
             dialog.color_purple.setOnClickListener {
                 dialogret()
                 color = 7
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_purple)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_purple)*/
                 dialog.color_purple.setBackgroundResource(R.drawable.group_63)
             }
             dialog.color_yello.setOnClickListener {
                 dialogret()
                 color = 3
-                Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
-                    ?.setBackgroundResource(R.drawable.check_round_yello)
+                /*Calendar().buf_view2?.findViewById<ImageView>(R.id.todo1)
+                    ?.setBackgroundResource(R.drawable.check_round_yello)*/
                 dialog.color_yello.setBackgroundResource(R.drawable.group_59)
+            }
+            dialog.tag_no.setOnClickListener{
+                tagdialogret()
+                dialog.tag_no.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_no.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+            dialog.tag_medicine.setOnClickListener{
+                tagdialogret()
+                dialog.tag_medicine.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_medicine.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+            dialog.tag_cut.setOnClickListener {
+                tagdialogret()
+                dialog.tag_cut.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_cut.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+            dialog.tag_walk.setOnClickListener{
+                tagdialogret()
+                dialog.tag_walk.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_walk.setTextColor(Color.parseColor("#FFFFFF"))
             }
 
         }
@@ -439,6 +547,51 @@ class CareFragment : DialogFragment(), OnItemListener {
             dialog.color_purple.setBackgroundResource(R.drawable.purple)
             dialog.color_pink.setBackgroundResource(R.drawable.pink)
         }
-
+        fun tagdialogret(){
+            dialog.tag_no.setBackgroundResource(R.drawable.rounded_corner_white)
+            dialog.tag_no.setTextColor(Color.parseColor("#5FA8D3"))
+            dialog.tag_medicine.setBackgroundResource(R.drawable.rounded_corner_white)
+            dialog.tag_medicine.setTextColor(Color.parseColor("#5FA8D3"))
+            dialog.tag_cut.setBackgroundResource(R.drawable.rounded_corner_white)
+            dialog.tag_cut.setTextColor(Color.parseColor("#5FA8D3"))
+            dialog.tag_walk.setBackgroundResource(R.drawable.rounded_corner_white)
+            dialog.tag_walk.setTextColor(Color.parseColor("#5FA8D3"))
+        }
+        fun tagfixdialogret(num : Int){
+            if(num==1){
+                dialog.tag_no.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_no.setTextColor(Color.parseColor("#FFFFFF"))
+            } else if(num==2){
+                dialog.tag_medicine.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_medicine.setTextColor(Color.parseColor("#FFFFFF"))
+            }else if(num==3){
+                dialog.tag_cut.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_cut.setTextColor(Color.parseColor("#FFFFFF"))
+            }else if(num==4){
+                dialog.tag_walk.setBackgroundResource(R.drawable.rounded_corner)
+                dialog.tag_walk.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+        }
+        fun colorfixdialogret(num : Int){
+            if(num==1){
+                dialog.color_red.setBackgroundResource(R.drawable.group_57)
+            } else if(num==3){
+                dialog.color_yello.setBackgroundResource(R.drawable.group_59)
+            }else if(num==2){
+                dialog.color_orange.setBackgroundResource(R.drawable.group_58)
+            }else if(num==4){
+                dialog.color_green.setBackgroundResource(R.drawable.group_60)
+            }else if(num==5){
+                dialog.color_blue.setBackgroundResource(R.drawable.group_61)
+            }else if(num==6){
+                dialog.color_blue_purple.setBackgroundResource(R.drawable.group_62)
+            }else if(num==7){
+                dialog.color_purple.setBackgroundResource(R.drawable.group_63)
+            }else if(num==8){
+                dialog.color_pink.setBackgroundResource(R.drawable.group_56)
+            }
+        }
     }
+
+
 }
