@@ -5,12 +5,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
+
+
+     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="39dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="680dp">
+
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="112dp"
@@ -19,13 +25,13 @@
                 android:layout_marginTop="40dp"
                 android:src="@drawable/logo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="188dp"
+                android:layout_marginEnd="20dp"
                 android:src="@drawable/dog"
                 app:layout_constraintBottom_toBottomOf="@+id/logo"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +40,17 @@
 
             <ImageButton
                 android:id="@+id/prevBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="44dp"
+                android:scaleType="fitStart"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:background="@android:color/transparent"
                 android:src="@drawable/prev"
-                app:layout_constraintBottom_toBottomOf="@+id/logo"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="17dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toStartOf="@+id/monthYearText"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/logo"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -48,22 +59,27 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="160dp"
                 android:fontFamily="@font/medi"
-                android:gravity="left"
-                android:layout_marginLeft="20dp"
+                android:gravity="center"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo"
                 tools:text="2023년 1월" />
 
             <ImageButton
+                android:scaleType="fitStart"
                 android:id="@+id/nextBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="104dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:background="@android:color/transparent"
                 android:src="@drawable/next"
-                app:layout_constraintBottom_toBottomOf="@+id/logo"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/monthYearText"
                 app:layout_constraintTop_toTopOf="@+id/logo"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -71,9 +87,9 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/monthYearText">
@@ -89,7 +105,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -102,7 +118,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -115,7 +131,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -128,7 +144,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -140,7 +156,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -173,29 +189,27 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_gravity="top"
-                android:paddingRight="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             </androidx.recyclerview.widget.RecyclerView>
-
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/bold"
                 android:gravity="left"
                 android:includeFontPadding="false"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
                 android:text="Todo list"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
             <ImageButton
                 android:id="@+id/listscroll"
                 android:layout_width="wrap_content"
@@ -208,36 +222,32 @@
                 app:layout_constraintTop_toTopOf="@+id/textView3"
                 app:srcCompat="@drawable/polygon" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginTop="10dp"
-                android:overScrollMode="never"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listscroll"
-                tools:layout_editor_absoluteY="-9dp"
-                tools:listitem="@layout/layout_todo" />
-
             <TextView
                 android:id="@+id/nolist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
                 android:fontFamily="@font/medi"
                 android:text="할일을 추가하세요"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"></TextView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/listscroll"
+                    tools:layout_editor_absoluteY="-9dp"
+                    tools:listitem="@layout/layout_todo" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-
-
+     </ScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plus_btn"
         android:layout_width="wrap_content"

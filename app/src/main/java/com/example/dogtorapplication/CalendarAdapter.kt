@@ -2,6 +2,7 @@
 package com.example.dogtorapplication
 
 
+import TodoAdapter
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -9,16 +10,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_calendar_body.*
 import java.util.*
+import kotlin.collections.ArrayList
+
 
 var buf_view: View? = null
+var buf_view1 : View? = null
+var viewsList= ArrayList<View>()
 class Calendar(){
     var buf_view2: View? = buf_view
+    var buf_view22 : View? = buf_view1
     var bb : Boolean = false
     fun change(){
         bb = true
@@ -29,29 +36,31 @@ class CalendarAdapter( var dayList: ArrayList<String>, private val onItemListene
     RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
     var check = 0
     var text: String? = null
-    var viewsList= ArrayList<View>()
 
     var buff2 = 0
     var a = 0
     var dot : Boolean = true
-
+    var viewsList= ArrayList<View>()
     fun a(): View? {
             return buf_view
         }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.calendar_cell, parent, false)
         viewsList.add(view)
+        CareFragment().setid(3)
+        //buf = view
         return CalendarViewHolder(view)
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         val day = dayList[position]
         val yearmothday = yearmothday()
         yearmothday.setDay(day)
+        buf_view1 = viewsList.get(position)
         //토일 색상 변경
         holder.dayText.text = day
         if (position == 11) {
@@ -122,12 +131,14 @@ object MyJavaClass {
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dayText: TextView
         var parentView: View
-        var recy3 : RecyclerView
+        var dot : ImageView
+        //var recy3 : RecyclerView
 
         init {
             dayText = itemView.findViewById(R.id.dayText)
             parentView = itemView.findViewById(R.id.parentView)
-            recy3 = itemView.findViewById(R.id.recyclerView3)
+            dot = itemView.findViewById(R.id.todo1)
+            //recy3 = itemView.findViewById(R.id.recyclerView3)
         }
     }
     inner class Todo(itemView: View) : RecyclerView.ViewHolder(itemView) {
