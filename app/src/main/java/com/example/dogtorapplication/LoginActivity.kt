@@ -40,8 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth // 객체 정의
 
-
-
         // 로그인 버튼 클릭 시 로그인 정보 확인
         binding.loginImageButton.setOnClickListener {
             signin()
@@ -67,8 +65,7 @@ class LoginActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // 구글 로그인 성공
                             email = account.email
-                            moveMainPage(task.result?.user) // moveMainPage 함수를 통해 메인 화면으로 넘어가기
-                            Toast.makeText(this,"login_success", Toast.LENGTH_LONG).show()
+                            moveMainPage(task.result?.user)
 
 
                         } else {

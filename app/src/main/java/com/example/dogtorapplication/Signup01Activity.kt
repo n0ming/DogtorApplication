@@ -16,6 +16,7 @@ class Signup01Activity : AppCompatActivity() {
 
     // 파이어 베이스 회원가입을 위한 객체 획득
     private lateinit var auth: FirebaseAuth
+    var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class Signup01Activity : AppCompatActivity() {
         // 가입 버튼 클릭 시 가입 진행될 수 있도록
         binding.loginSubmitButton.setOnClickListener {
             signinEmail()
+
         }
 
         // 취소 버튼 클릭 시 뒤로갈 수 있도록
@@ -36,27 +38,54 @@ class Signup01Activity : AppCompatActivity() {
         }
 
     }
-
+    fun checkAuth():Boolean{
+        val currentUser = auth.currentUser
+        return currentUser?.let{
+            email = currentUser.email
+            currentUser.isEmailVerified
+        } ?: let{
+            false
+        }
+    }
     fun signinEmail(){
         // createUserWithEmailAndPassword() 이용하여 사용자 생성
         auth.createUserWithEmailAndPassword(binding.emailEditText.text.toString(),binding.numberEditText.text.toString())
-            .addOnCompleteListener(this) {
-                    task ->
+            .addOnCompleteListener(this) { task ->
                 if(task.isSuccessful){ // 생성이 되었다면
+                    val nextIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(nextIntent)
+                    /*
+                    Toast.makeText(baseContext,
+                        "인증 메일이 전송되었습니다. 메일을 통해 인증해주세요!",
+                        Toast.LENGTH_SHORT).show()
+
+
                     auth.currentUser?.sendEmailVerification()
-                        ?.addOnCompleteListener { sendTask ->
+                        ?.addOnCompleteListener {sendTask ->
                             if(sendTask.isSuccessful){
-                                Toast.makeText(this,"가입이 완료 되었습니다. My에서 내정보를 설정해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+                                if (checkAuth()) {
+                                    // 로그인 성공
+                                    Toast.makeText(baseContext,
+                                        "가입을 환영합니다! 마이페이지에서 내정보를 입력해주세요.",
+                                        Toast.LENGTH_SHORT).show()
+                                    val nextIntent = Intent(this, LoginActivity::class.java)
+                                    startActivity(nextIntent)
+
+                                } else {
+                                    // 발송된 메일로 인증 확인을 안 한 경우
+                                    Toast.makeText(baseContext,
+                                        "전송된 메일로 이메일 인증이 되지 않았습니다.",
+                                        Toast.LENGTH_SHORT).show()
+                                }
                             }
                             else{
                                 Toast.makeText(this,"메일 전송에 실패하였습니다. 유효한 이메일로 다시 가입해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
 
                             }
 
-                        }
 
-                    val nextIntent = Intent(this, LoginActivity::class.java)
-                    startActivity(nextIntent)
+                        }
+*/
                 }
                 else{ // 생성을 못했다면
                     Toast.makeText(this,task.exception?.message, Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기

@@ -27,66 +27,69 @@
         app:layout_constraintTop_toTopOf="@+id/logo"
         app:layout_constraintVertical_bias="0.2" />
 
-    <ImageButton
-        android:id="@+id/prevBtn"
-        android:layout_width="10dp"
-        android:layout_height="15dp"
-        android:layout_marginEnd="10dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitStart"
-        android:src="@drawable/prev"
-        app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
-        app:layout_constraintEnd_toStartOf="@+id/monthYearText"
-        app:layout_constraintTop_toTopOf="@+id/monthYearText" />
-
-    <TextView
-        android:id="@+id/monthYearText"
-        style="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bold"
-        android:layout_marginStart="160dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        tools:text="2023년 1월" />
-
-
-    <ImageButton
-        android:id="@+id/nextBtn"
-        android:layout_width="10dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="10dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitStart"
-        android:src="@drawable/next"
-        app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
-        app:layout_constraintStart_toEndOf="@+id/monthYearText"
-        app:layout_constraintTop_toTopOf="@+id/monthYearText" />
-
     <ScrollView
         android:id="@+id/scrollView5"
         android:layout_width="match_parent"
-        android:layout_height="535dp"
-        tools:layout_editor_absoluteY="150dp"
-        app:layout_constraintTop_toBottomOf="@+id/monthYearText">
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="680dp">
+
+            <ImageButton
+                android:id="@+id/prevBtn"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitStart"
+                android:src="@drawable/prev"
+                app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
+                app:layout_constraintEnd_toStartOf="@+id/monthYearText"
+                app:layout_constraintTop_toTopOf="@+id/monthYearText" />
+
+            <TextView
+                android:id="@+id/monthYearText"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2023년 1월" />
+
+
+            <ImageButton
+                android:id="@+id/nextBtn"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitStart"
+                android:src="@drawable/next"
+                app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
+                app:layout_constraintStart_toEndOf="@+id/monthYearText"
+                app:layout_constraintTop_toTopOf="@+id/monthYearText" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/monthYearText">
 
                 <TextView
 
@@ -184,10 +187,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:paddingRight="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -200,9 +203,9 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/bold"
                 android:gravity="left"
-                android:textColor="@color/black"
                 android:includeFontPadding="false"
                 android:text="Todo list"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -225,7 +228,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="40dp"
+                android:paddingBottom="50dp"
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -263,4 +266,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/white" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
