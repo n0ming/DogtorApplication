@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogtorapplication.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         // 바인딩 기본 작업
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         // 회원 정보 저장을 위한 변수 선언
         auth = FirebaseAuth.getInstance()
@@ -80,9 +82,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             R.id.action_care->{
                 var calendarFragment = CareFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
-
-                //var calendarFragment = CalendarFragment()
-                //supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
                 return true
             }
             R.id.action_explore->{
@@ -112,6 +111,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             1 -> {
                 var calendarFragment = CareFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,calendarFragment).commit()
+                binding.bottomNavigation.menu.getItem(0).isChecked = true
             }
 
             2 -> {

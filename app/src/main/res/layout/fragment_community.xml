@@ -11,7 +11,7 @@
         android:id="@+id/logo"
         android:layout_width="112dp"
         android:layout_height="42dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -154,7 +154,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="557dp"
+        android:layout_height="537dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoryscroll"
