@@ -7,43 +7,157 @@
     android:layout_marginRight="20dp"
     android:layout_marginLeft="20dp"
     tools:context=".CommunityFragment">
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/categorybutton1"
-        android:layout_width="62dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_click"
-        android:padding="0dp"
-        android:text="전체"
-        android:textColor="@drawable/text_click"
-        android:textSize="16sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="112dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/categorybutton2"
-        android:layout_width="62dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:padding="0dp"
-        android:layout_marginLeft="10dp"
-        android:text="구토"
-        android:background="@drawable/button_click"
-        android:textColor="@drawable/text_click"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/categorybutton1"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/mytransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dog"
+        app:layout_constraintBottom_toBottomOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo" />
+
+    <HorizontalScrollView
+        android:id="@+id/categoryscroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton0"
+                android:layout_width="62dp"
+                android:layout_height="35dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="전체"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton1"
+                android:layout_width="62dp"
+                android:layout_height="35dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="병원"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton0"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton2"
+                android:layout_width="62dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="질병"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton3"
+                android:layout_width="62dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="운동"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton4"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="마사지"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton5"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="건강식"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton6"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="영양제"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/categorybutton7"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_click"
+                android:padding="0dp"
+                android:text="기타"
+                android:textColor="@drawable/text_click"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/categorybutton6"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="557dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorybutton1"
+        app:layout_constraintTop_toBottomOf="@+id/categoryscroll"
         tools:listitem="@layout/list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

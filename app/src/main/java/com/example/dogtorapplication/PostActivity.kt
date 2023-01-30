@@ -2,11 +2,13 @@ package com.example.dogtorapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.example.dogtorapplication.databinding.ActivityPostBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 class PostActivity : AppCompatActivity() {
@@ -15,11 +17,14 @@ class PostActivity : AppCompatActivity() {
     lateinit var db : FirebaseFirestore
     lateinit var storage : FirebaseStorage
 
+    /*
     var local : String? =null
+    var name : String? = null
     var category : String? =null
     var title : String? =null
     var content : String? =null
     var date : String? =null
+     */
 
     private lateinit var binding : ActivityPostBinding
 
@@ -37,21 +42,37 @@ class PostActivity : AppCompatActivity() {
 
         val intent = intent /*데이터 수신*/
         var local = intent.extras!!.getString("local")
+        var name = intent.extras!!.getString("name")
         var category = intent.extras!!.getString("category")
         var title = intent.extras!!.getString("title")
         var content = intent.extras!!.getString("content")
         var date = intent.extras!!.getString("date")
+        var docId = intent.extras!!.getString("docId")
 
         binding.localTextView.text = local
         binding.categoryTextView.text = category
         binding.tvTitle.text = title
         binding.dateTextView.text = date
         binding.tvContent.text = content
+        binding.nameTextView.text = name
 
         binding.backBtn2.setOnClickListener {     // 뒤로가기 클릭시 액티비티 종료
             finish()
         }
 
+        //스토리지 이미지 다운로드
+        val imgRef= storage
+            .reference
+            .child("images/${docId}.jpg")
+
+        imgRef.getDownloadUrl().addOnCompleteListener { task ->
+            if (task.isSuccessful) { // 성공
+                Glide.with(this) // Glide 사용하여 이미지 핸들링
+                    .load(task.result)
+                    .into(binding.imageView2)
+
+            }
+        }
 
         /*
         val intent = intent /*데이터 수신*/

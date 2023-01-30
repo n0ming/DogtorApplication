@@ -10,7 +10,7 @@
         android:layout_width="10.86dp"
         android:layout_height="18.95dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="20dp"
-        android:text="닉네임"
+        android:text="전화번호"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv2" />
@@ -130,15 +130,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv7" />
 
-    <TextView
-        android:id="@+id/password_change"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="20dp"
-        android:text="비밀번호 변경"
-        android:textSize="27dp"
-        app:layout_constraintTop_toTopOf="@id/tv8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -112,18 +113,23 @@ class LoginActivity : AppCompatActivity() {
 
     // 로그인 시에 불러 로그인되도록 하는 함수
     fun signin(){
-        // signInWithEmailAndPassword() 이용하여 로그인 가능하도록 설정
-        auth?.signInWithEmailAndPassword(binding.loginIdEditText.text.toString(),binding.loginPasswordEditText.text.toString())
-            ?.addOnCompleteListener {
-                    task ->
-                if(task.isSuccessful){ // 성공 시
-                    moveMainPage(task.result?.user) // moveMainPage 함수를 통해 메인 화면으로 넘어가기
-                }else{ // 실패 시
-                    // Show the error message
-                    Toast.makeText(this,task.exception?.message, Toast.LENGTH_LONG).show()
+        if (login_id_EditText.text.toString().isNotEmpty() && login_password_EditText.text.toString().isNotEmpty()) {
+            auth?.signInWithEmailAndPassword(login_id_EditText.text.toString(), login_password_EditText.text.toString())
+                ?.addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            baseContext, "로그인에 성공 하였습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        moveMainPage(auth?.currentUser)
+                    } else {
+                        Toast.makeText(
+                            baseContext, "로그인에 실패 하였습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-
-            }
+        }
     }
 
     // 로그인 성공 시 메인 액티비티로 넘어가주는 함수
@@ -135,4 +141,3 @@ class LoginActivity : AppCompatActivity() {
 
 
 }
-

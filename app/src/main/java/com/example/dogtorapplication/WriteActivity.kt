@@ -31,8 +31,7 @@ class WriteActivity : AppCompatActivity() {
     lateinit var db : FirebaseFirestore
     lateinit var storage : FirebaseStorage
 
-    var local : String? = null
-    var userID : String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +49,10 @@ class WriteActivity : AppCompatActivity() {
                 "image/*"
             )
             requestLauncher.launch(intent)
+        }
+
+        binding.backBtn2.setOnClickListener{
+            finish()
         }
 
         binding.finish.setOnClickListener {
@@ -107,35 +110,39 @@ class WriteActivity : AppCompatActivity() {
         // 파이어 베이스에 글을 저장하기 위해 호출되는 함수
 
         // 회원의 지역 정보 가져오기
-        db?.collection("users")?.document(auth.uid.toString())?.get()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                var userDTO = task.result?.toObject(userInformation::class.java)
-                local = userDTO?.local
-                userID = userDTO?.userEmail
-            }
-        }
+        db.collection("userplus")
+            .whereEqualTo("userID",auth.uid.toString())
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    var userDTO = document.toObject(userplusImformation::class.java)
 
-        // 저장할 데이터
-        val data = mapOf(
-            "userID" to userID,
-            "local" to local, // 지역
-            "title" to binding.etTitle.text.toString(), // 글 제목
-            "content" to binding.etContent.text.toString(), // 글 내용
-            "category" to binding.etCategory.text.toString(), // 카테고리
-            "date" to dateToString(Date()), // 쓴 날짜
-            "imgUrl" to Uri.fromFile(File(filePath)).toString() // imgUri
-        )
+                    // 저장할 데이터
+                    val data = mapOf(
+                        "userID" to userDTO.local.toString(),
+                        "local" to userDTO.local.toString(), // 지역
+                        "name" to userDTO.userName.toString(), // 이름
+                        "title" to binding.etTitle.text.toString(), // 글 제목
+                        "content" to binding.etContent.text.toString(), // 글 내용
+                        "category" to binding.etCategory.text.toString(), // 카테고리
+                        "date" to dateToString(Date()), // 쓴 날짜
+                        "imgUrl" to Uri.fromFile(File(filePath)).toString() // imgUri
+                    )
 
-        // 데이터 저장 컬랙션
-        db.collection("post") // 성공
-            .add(data)
-            .addOnSuccessListener {
-                // 스토리지에 데이터 저장 후 id값으로 스토리지에 이미지 업로드
-                uploadImage(it.id)
+                    // 데이터 id 값과 함께 저장
+                    db.collection("post")
+                        .add(data)
+                        .addOnSuccessListener {
+                            // 스토리지에 데이터 저장 후 id값으로 스토리지에 이미지 업로드
+                            uploadImage(it.id)
+                        }
+                        .addOnFailureListener {// 실패
+                            Log.w("lee", "data save error", it)
+                        }
+                }
             }
-            .addOnFailureListener {// 실패
-                Log.w("lee", "data save error", it)
-            }
+
+
     }
 
     private fun uploadImage(docId: String){

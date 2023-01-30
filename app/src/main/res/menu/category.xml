@@ -2,26 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu1"
-        android:title="설사+구토" />
+        android:title="병원" />
     <item
         android:id="@+id/menu2"
-        android:title="구토" />
+        android:title="질병" />
     <item
         android:id="@+id/menu3"
-        android:title="발 습진" />
+        android:title="운동" />
     <item
         android:id="@+id/menu4"
-        android:title="눈 색깔" />
+        android:title="마사지" />
     <item
         android:id="@+id/menu5"
-        android:title="외부 내장 노출" />
+        android:title="건강식" />
     <item
         android:id="@+id/menu6"
-        android:title="병원 후기" />
+        android:title="영양제" />
     <item
         android:id="@+id/menu7"
-        android:title="투병"/>
-    <item
-        android:id="@+id/menu8"
         android:title="기타"/>
 </menu>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dogtorapplication.databinding.ListItemBinding
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -29,30 +30,36 @@ class MyAdapter(val context: Context, val itemList: MutableList<writeInformation
     }
 
     override fun getItemCount(): Int {
-        Log.w("lee", itemList.size.toString())
         return itemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = itemList.get(position)
 
+        // 클릭 시 정보 넘기기
         holder.itemView.setOnClickListener{
             Intent(context, PostActivity::class.java).apply{
+
+                // 데이터 전달
                 putExtra("local",  holder.binding.localTextView.text.toString())
                 putExtra("category",  holder.binding.categoryTextView.text.toString())
                 putExtra("title",  holder.binding.titleTextView.text.toString())
                 putExtra("date",  holder.binding.dateTextView.text.toString())
+                putExtra("content",  data.content.toString())
+                putExtra("name",  holder.binding.name.text.toString())
+                putExtra("docId",  data.docId.toString())
 
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run{context.startActivity(this)}
         }
 
+        // view랑 data 연결
         holder.binding.run {
             localTextView.text=data.local
             categoryTextView.text=data.category
             titleTextView.text=data.title
             dateTextView.text=data.date
-
+            name.text = data.name
         }
 
         //스토리지 이미지 다운로드

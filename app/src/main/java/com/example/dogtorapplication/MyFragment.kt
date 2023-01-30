@@ -33,6 +33,17 @@ class MyFragment : Fragment() {
 
         tv.text = userEmail // 받아온 이메일 정보로 text 설정
 
+        // 메인 액티비티의 함수 사용하기 위해 메인 액티비티 받아오기
+        val mActivity = activity as MainActivity
+
+        // 액티비티에서 정의해둔 transaction으로 이동 구현
+        view.logo.setOnClickListener {
+            mActivity.transaction(1)
+        }
+        view.mydog.setOnClickListener {
+            mActivity.transaction(2)
+        }
+
         myInf.setOnClickListener {// 내정보 버튼 클릭 시 이동
             val intent = Intent(activity, com.example.dogtorapplication.myinformation::class.java)
             startActivity(intent)

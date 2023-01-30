@@ -30,6 +30,11 @@ class Signup01Activity : AppCompatActivity() {
             signinEmail()
         }
 
+        // 취소 버튼 클릭 시 뒤로갈 수 있도록
+        binding.loginCancleButton.setOnClickListener {
+            finish()
+        }
+
     }
 
     fun signinEmail(){
@@ -39,7 +44,8 @@ class Signup01Activity : AppCompatActivity() {
                     task ->
                 if(task.isSuccessful){ // 생성이 되었다면
                     //Login
-                    Toast.makeText(this,"회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+                    Toast.makeText(this,"로그인이 완료 되었습니다. My에서 내정보를 설정해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+
                     val nextIntent = Intent(this, LoginActivity::class.java)
                     startActivity(nextIntent)
                 }
