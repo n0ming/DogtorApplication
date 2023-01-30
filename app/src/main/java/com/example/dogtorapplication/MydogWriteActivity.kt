@@ -58,6 +58,7 @@ class MydogWriteActivity : AppCompatActivity() {
                 // 화면 전환
                 val intent = Intent(this, MydogActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             else{
                 Toast.makeText(this, "데이터를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()

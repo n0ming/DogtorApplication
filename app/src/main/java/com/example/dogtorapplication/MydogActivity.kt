@@ -32,13 +32,12 @@ class MydogActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-
-
-
         binding.retouch.setOnClickListener{
             val intent = Intent(this,MydogWriteActivity::class.java)
             startActivity(intent)
+            finish()
         }
+
         binding2.done.setOnClickListener{
             // 회원의 정보 가져오기
             db.collection("doginfo")
