@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
     <Button
+        android:includeFontPadding="false"
+        android:fontFamily="@font/bold"
         android:id="@+id/retouch"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -20,6 +22,8 @@
         app:layout_constraintTop_toTopOf="@+id/dogName" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/bold"
         android:id="@+id/dogName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,14 +33,13 @@
         android:text="질병 또는 수술 내역"
         android:textColor="@android:color/black"
         android:textSize="25dp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_dog"
         android:layout_width="match_parent"
-        android:layout_height="535dp"
+        android:layout_height="585dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"

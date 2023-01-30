@@ -13,6 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/bold"
             android:id="@+id/sickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +27,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/medi"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +41,8 @@
             app:layout_constraintTop_toBottomOf="@+id/sickname" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/light"
             android:id="@+id/datename"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
@@ -48,6 +54,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintStart_toEndOf="@+id/textView2" />
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/medi"
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +68,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/light"
             android:id="@+id/hospitalname"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
@@ -71,6 +81,8 @@
             app:layout_constraintStart_toEndOf="@+id/textView3" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/medi"
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,6 +95,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:fontFamily="@font/light"
             android:id="@+id/medicinename"
             android:layout_width="310dp"
             android:layout_height="wrap_content"

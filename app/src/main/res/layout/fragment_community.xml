@@ -38,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton0"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
@@ -46,11 +48,12 @@
                 android:text="전체"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton1"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
@@ -59,12 +62,13 @@
                 android:text="병원"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton0"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton2"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
@@ -74,11 +78,12 @@
                 android:text="질병"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton3"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
@@ -88,11 +93,12 @@
                 android:text="운동"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton4"
                 android:layout_width="72dp"
                 android:layout_height="35dp"
@@ -102,11 +108,12 @@
                 android:text="마사지"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton5"
                 android:layout_width="72dp"
                 android:layout_height="35dp"
@@ -116,11 +123,12 @@
                 android:text="건강식"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton4"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton6"
                 android:layout_width="72dp"
                 android:layout_height="35dp"
@@ -130,11 +138,12 @@
                 android:text="영양제"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton5"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:includeFontPadding="false"
+                android:fontFamily="@font/medi"
                 android:id="@+id/categorybutton7"
                 android:layout_width="72dp"
                 android:layout_height="35dp"
@@ -144,7 +153,6 @@
                 android:text="기타"
                 android:textColor="@drawable/text_click"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/categorybutton6"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

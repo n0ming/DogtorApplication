@@ -17,6 +17,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/bold"
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,6 +41,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/light"
         android:id="@+id/categoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +55,8 @@
         app:layout_constraintTop_toBottomOf="@+id/backBtn2" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/light"
         android:id="@+id/localTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,6 +70,8 @@
         app:layout_constraintTop_toTopOf="@+id/categoryTextView" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/light"
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,6 +83,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/light"
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,6 +110,8 @@
 
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

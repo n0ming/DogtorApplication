@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/bold"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +32,8 @@
         app:layout_constraintTop_toBottomOf="@+id/backBtn" />
 
     <Button
+        android:includeFontPadding="false"
+        android:fontFamily="@font/bold"
         android:id="@+id/retouch"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -43,6 +47,8 @@
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +60,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,6 +73,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,6 +86,8 @@
         app:layout_constraintTop_toTopOf="@id/tv2" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,6 +99,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tv3" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,6 +112,8 @@
         app:layout_constraintTop_toTopOf="@id/tv4" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,6 +125,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tv5" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,6 +138,8 @@
         app:layout_constraintTop_toTopOf="@id/tv6" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -130,6 +150,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv7" />
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,6 +163,8 @@
         app:layout_constraintTop_toTopOf="@id/tv8" />
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/medi"
         android:id="@+id/tv10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
