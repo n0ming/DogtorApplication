@@ -221,7 +221,7 @@ class ExploreFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener 
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView.onDestroy()
+       // mapView.onDestroy()
     }
 
     // 메모리가 별로 없을 때 호출됨
