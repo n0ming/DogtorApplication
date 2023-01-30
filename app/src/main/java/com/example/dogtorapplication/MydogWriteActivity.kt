@@ -24,6 +24,9 @@ class MydogWriteActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var db : FirebaseFirestore
 
+    var username : String? = null
+    var userdogname : String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMydogWriteBinding.inflate(layoutInflater)
@@ -65,7 +68,6 @@ class MydogWriteActivity : AppCompatActivity() {
 
 
     private fun saveStore(){
-        // 파이어 베이스에 글을 저장하기 위해 호출되는 함수
 
         db.collection("userplus")
             .whereEqualTo("userID",auth.uid.toString())
@@ -101,8 +103,9 @@ class MydogWriteActivity : AppCompatActivity() {
                         }
                 }
             }
-
-
+            .addOnFailureListener { exception->
+                Log.w("wwww","wer",exception)
+            }
     }
 
     fun dateToString2(date: Date): String {

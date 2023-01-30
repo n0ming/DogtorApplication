@@ -125,16 +125,13 @@ class CareFragment : DialogFragment(), OnItemListener {
 /*
         myHelper = MyDBHelper(ct!!,"groupDo",1)
         adapter = TodoAdapter()
-
         val recycleView2 : RecyclerView = v2.findViewById<RecyclerView>(R.id.recycleView2)as RecyclerView
         val dbHelper = MyDBHelper(ct, "mydb.db", 1)
         val adapter: TodoAdapter = TodoAdapter()
-
         val memos = dbHelper.selectMemo()
         adapter.lisData.addAll(memos)
         recycleView2.adapter = adapter
         recycleView2.layoutManager = LinearLayoutManager(this)
-
         val buttonSave : Button = test.findViewById(R.id.buttonSave)
         val editMemo : EditText = findViewById(R.id.editMemo)
         buttonSave.setOnClickListener{
@@ -194,7 +191,6 @@ class CareFragment : DialogFragment(), OnItemListener {
             // Custom Dialog 표시
             dialog.showDialog(true, Todoupdate().num!!+1)
         }
-
         //클릭해도 onclick 안되고 여기서 되면 dialog 바로 등장 시키고 수정뒤 ...
         Todoupdate().buf_view4?.findViewById<ImageButton>(R.id.updatebtn)?.setOnClickListener {
             Log.d("aa","clickㅁㅁㅁㅁㅁㅁㅁㅁㅁ")
@@ -337,7 +333,7 @@ class CareFragment : DialogFragment(), OnItemListener {
         input = yearMonday
         //이벤트
         if(Main().size!=0){
-        Toast.makeText(ct, "Todo list 버튼을 통해 할일을 확인해보세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(ct, "Todo list 버튼을 통해 할일을 확인해보세요", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(ct, "Todo list 버튼을 통해 할일을 확인해보세요", Toast.LENGTH_SHORT).show()
         }
