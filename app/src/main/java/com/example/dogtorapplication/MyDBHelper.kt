@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-data class Memo(var ItemPlus: Int?, var Color: Int, var Text: String)
+data class Memo(var ItemPlus: Int?, var Color: Int, var Text: String, var Text2 : String)
 var TableName : String? = CareFragment.Main().input2
 class MyDBHelper (
     context: Context?,
@@ -16,7 +16,7 @@ class MyDBHelper (
 ): SQLiteOpenHelper(context, name,null, 1){
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("DBTABLE", "$TableName")
-        var sql : String = "create table memo(`Itemplus` integer primary key, Color integer, Text text)"
+        var sql : String = "create table memo(`Itemplus` integer primary key, Color integer, Text text, Text2 text )"
         db!!.execSQL(sql)
     }
 
@@ -33,12 +33,14 @@ class MyDBHelper (
         values.put("ItemPlus",memo.ItemPlus)
         values.put("Color",memo.Color)
         values.put("Text",memo.Text)
+        values.put("Text2",memo.Text2)
 
         //db에 넣기
         wd.insert("memo", null,values)
         //db닫기
         wd.close()
     }
+
     //데이터 조회 함수
     @SuppressLint("Range")
     fun selectMemo() : MutableList<Memo>{
@@ -51,7 +53,8 @@ class MyDBHelper (
             val itemcolor = cursor.getInt(0)
             val text = cursor.getString(2)
             val color = cursor.getInt(1)
-            val memo = Memo(itemcolor, color, text)
+            val text2 = cursor.getString(3)
+            val memo = Memo(itemcolor, color, text, text2)
             list.add(memo)
         }
         cursor.close()
@@ -63,7 +66,7 @@ class MyDBHelper (
         val select = "select * from memo where ItemPlus = $num" // content
         val rd = readableDatabase
         var text = "NAME"
-        var memo : Memo = Memo(0,0,"")
+        var memo : Memo = Memo(0,0,"","")
         val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
         while(cursor.moveToNext()){
             text = cursor.getString(2)
@@ -73,25 +76,57 @@ class MyDBHelper (
         rd.close()
         return text
     }
+    fun selectText2(num : Int) : String{
+        Log.d("num","$num")
+        val select = "select * from memo where ItemPlus = $num" // content
+        val rd = readableDatabase
+        var text = "NAME"
+        var memo : Memo = Memo(0,0,"","")
+        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        while(cursor.moveToNext()){
+            text = cursor.getString(3)
+
+        }
+        cursor.close()
+        rd.close()
+        return text
+    }
+    fun selectColor(num : Int) : Int{
+        Log.d("num","$num")
+        val select = "select * from memo where ItemPlus = $num" // content
+        val rd = readableDatabase
+        var color = 0
+        var memo : Memo = Memo(0,0,"","")
+        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        while(cursor.moveToNext()){
+            color = cursor.getInt(1)
+
+        }
+        cursor.close()
+        rd.close()
+        return color
+    }
+    //아직 check 추가 안함
     //데이터 수정 함수
-    fun updateMemo(memo: Memo){
+    fun updateMemo(memo: Memo,num: Int){
         val wd = writableDatabase
 
         val values = ContentValues()
-        values.put("ItemPlus",memo.ItemPlus)
-        values.put("Text",memo.Text)
         values.put("Color",memo.Color)
+        values.put("Text",memo.Text)
+        values.put("Text2",memo.Text2)
 
-        wd.update("memo", values, "no = ${memo.ItemPlus}",null)
+        wd.update("memo", values, "ItemPlus = ${num}",null)
+        Log.d("updatetext","완료")
         wd.close()
     }
     //데이터 삭제함수
-    fun deleteMemo(memo: Memo){
+    fun deleteMemo(num: Int){
         val wd = writableDatabase
         //val delete = "delete from memo where no = ${memo.no}"
         //wd.execSQL(delete)
 
-        wd.delete("memo","no=${memo.ItemPlus}",null)
+        wd.delete("memo","ItemPlus=${num}",null)
         wd.close()
     }
 }

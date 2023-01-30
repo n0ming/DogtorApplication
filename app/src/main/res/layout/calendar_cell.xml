@@ -21,61 +21,16 @@
         android:text="1"
 
         android:textSize="12sp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/todo1"
-        android:visibility="invisible"
-        android:layout_marginRight="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/check_round">
-    </ImageView>
-        <ImageView
-            android:id="@+id/todo2"
-            android:visibility="invisible"
-            android:layout_marginRight="4dp"
-            android:layout_width="wrap_content"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/check_round">
-        </ImageView>
-        <ImageView
-            android:id="@+id/todo3"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/check_round">
-        </ImageView>
-    </LinearLayout>
-    <LinearLayout
-        android:paddingTop="3dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/todo4"
-            android:visibility="invisible"
-            android:layout_marginRight="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/check_round">
-        </ImageView>
-        <ImageView
-            android:id="@+id/todo5"
-            android:visibility="invisible"
-            android:layout_marginRight="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/check_round">
-        </ImageView>
-        <ImageView
-            android:id="@+id/todo6"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/check_round">
-        </ImageView>
-    </LinearLayout>
+            android:layout_gravity="top"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:listitem="@layout/check_round"></androidx.recyclerview.widget.RecyclerView>
 
 
 
