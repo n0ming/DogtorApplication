@@ -19,19 +19,34 @@
         android:id="@+id/todoList"
         android:paddingTop="5dp"
         android:paddingLeft="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/medi"
         android:gravity="left"
         android:textSize="16dp"
         android:text="산책 시키기"/>
+    <TextView
+        android:id="@+id/position"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medi"
+        android:gravity="left"
+        android:textSize="16dp" android:layout_width="wrap_content"/>
+
     <ImageButton
         android:id="@+id/updatebtn"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="240dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/update"
-        android:background="#00ff0000"></ImageButton>
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:background="#00ff0000"
+        android:src="@drawable/bx_pencil"></ImageButton>
+    <ImageButton
+        android:id="@+id/deletebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#00ff0000"
+        android:src="@drawable/trash"></ImageButton>
 
 </LinearLayout>

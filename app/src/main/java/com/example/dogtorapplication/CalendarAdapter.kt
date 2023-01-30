@@ -83,7 +83,7 @@ class CalendarAdapter( var dayList: ArrayList<String>, private val onItemListene
                 //viewsList.get(text!!.toInt()).findViewById(R.id.todo1).setVisibility(View.VISIBLE)
             }
             //bb를 true로 바꾸는 방법 모색
-            CareFragment().recyclerView2?.setVisibility(View.INVISIBLE)
+
             Log.d("첵크","ok = ${com.example.dogtorapplication.Calendar().bb}")
             //다른 일정 클릭해서 recylce 바꿔야함
             Log.d("첵크","ok")
@@ -122,10 +122,12 @@ object MyJavaClass {
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dayText: TextView
         var parentView: View
+        var recy3 : RecyclerView
 
         init {
             dayText = itemView.findViewById(R.id.dayText)
             parentView = itemView.findViewById(R.id.parentView)
+            recy3 = itemView.findViewById(R.id.recyclerView3)
         }
     }
     inner class Todo(itemView: View) : RecyclerView.ViewHolder(itemView) {

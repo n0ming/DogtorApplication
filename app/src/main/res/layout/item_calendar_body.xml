@@ -5,12 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-121dp"
+        tools:layout_editor_absoluteY="16dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="680dp">
+
             <ImageView
                 android:id="@id/logo"
                 android:layout_width="112dp"
@@ -19,12 +24,14 @@
                 android:layout_marginTop="19dp"
                 android:src="@drawable/logo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/doglog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
                 android:src="@drawable/dog"
                 app:layout_constraintBottom_toBottomOf="@+id/logo"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +42,9 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/medi"
                 android:gravity="left"
-                android:layout_marginLeft="20dp"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo"
@@ -47,9 +54,9 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/monthYearText">
@@ -65,7 +72,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -78,7 +85,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -91,7 +98,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -104,7 +111,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -116,7 +123,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/day_gray"
                     android:textSize="12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -149,22 +156,23 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_gravity="top"
-                android:paddingRight="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/bold"
                 android:gravity="left"
                 android:includeFontPadding="false"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
                 android:text="Todo list"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,12 +195,12 @@
                 android:id="@+id/recycleView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false"
-                android:layout_marginTop="10dp"
                 android:overScrollMode="never"
+                android:paddingBottom="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/listscroll"
-                tools:layout_editor_absoluteY="-9dp"
                 tools:listitem="@layout/layout_todo" />
 
             <TextView
@@ -201,9 +209,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
                 android:fontFamily="@font/medi"
                 android:text="할일을 추가하세요"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"></TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -212,6 +220,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/update_btn"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

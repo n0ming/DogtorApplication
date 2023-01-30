@@ -22,18 +22,19 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ax">
         </ImageButton>
-        <TextView
-            android:id="@+id/todo_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/medi"
-            android:gravity="left"
-            android:includeFontPadding="false"
-            android:paddingLeft="30dp"
-            android:paddingTop="3.6dp"
-            android:text="할 일 이름"
-            android:textColor="@color/black"
-            android:textSize="24dp" />
+    <EditText
+        android:layout_marginLeft="30dp"
+        android:id="@+id/editMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/medi"
+        android:inputType="textPersonName"
+        android:background="@null"
+        android:includeFontPadding="false"
+        android:textSize="24dp"
+        android:hint="ToDo 일정이름" />
+
 
 
         <View
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:background="@drawable/red_circle">
+                android:background="@drawable/group_57">
             </ImageButton>
             <Space
                 android:layout_width="wrap_content"
@@ -284,12 +285,12 @@
 
                     <EditText
                         android:layout_marginLeft="30dp"
-                        android:id="@+id/editMemo"
+                        android:id="@+id/editMemo2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        android:text="Name" />
+                        android:hint="상세정보를 입력하세요" />
         <!--<EditText
             android:id="@+id/edit"
             android:layout_width="match_parent"

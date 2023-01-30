@@ -45,33 +45,47 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.media.Image
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogtorapplication.*
 import com.example.dogtorapplication.CareFragment.CustomDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.item_calendar_body.*
 import kotlinx.android.synthetic.main.layout_todo.view.*
 import kotlinx.android.synthetic.main.todo_add.*
+import kotlinx.android.synthetic.main.todo_fix.view.*
+import org.w3c.dom.Text
 import java.util.*
+import kotlin.collections.ArrayList
 
 var buf_view3: View? = null
 var positionNum : Int? =0
+var positionString :String =""
 var buff_holder : TodoAdapter.TodoViewHolder? = null
 class Todoupdate(){
     val buf_view4: View? = buf_view3
     var num : Int? = positionNum
+    var string : String? = positionString
 }
 
-class TodoAdapter() :
+class TodoAdapter(careFragment: CareFragment) :
     RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+    //date
+    val careFragment = careFragment
+
     //yearmothday
     val colorjava = yearmothday()
     var listDate = mutableListOf<Memo>()
@@ -81,7 +95,6 @@ class TodoAdapter() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.layout_todo, parent, false)
-        view.findViewById<ImageButton>(R.id.updatebtn).setVisibility(View.INVISIBLE)
         viewsList2.add(view)
         return TodoViewHolder(view)
     }
@@ -94,6 +107,8 @@ class TodoAdapter() :
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val memo = listDate.get(position)
+        //buff_holder?.updateBtn?.setVisibility(View.INVISIBLE)
+        holder.setRec()
         holder.setMemo(memo)
         //holder.todoList.text = "메롱" //Text
         //val mGradientDrawable = holder.rectangle.background as GradientDrawable
@@ -101,11 +116,22 @@ class TodoAdapter() :
         Log.d("aa","click22")
         holder.rectangle.setOnClickListener {
             buff_holder?.retRec()
+            //buff_holder?.updateBtn?.setVisibility(View.INVISIBLE)
             holder.setRec()
+            //holder.updateBtn.setVisibility(View.VISIBLE)
             buf_view3 = viewsList2.get(position)
-            positionNum = position
-            Todoupdate().buf_view4!!.findViewById<ImageButton>(R.id.updatebtn).setVisibility(View.VISIBLE)
+            positionNum = Integer.parseInt(holder.position.text.toString())
             buff_holder = holder
+            holder.updateBtn.setOnClickListener {
+                var id =1
+                careFragment.setid(id)
+            }
+            holder.deleteBtn.setOnClickListener {
+                var id =2
+                careFragment.setid(id)
+            }
+            Log.d("interface","ok")
+
         }
         Log.d("aa","$buf_view3")
         //buf_view3!!.findViewById<ImageButton>(R.id.update).setOnClickListener { Log.d("aa","fianl") }
@@ -119,7 +145,8 @@ class TodoAdapter() :
         //데이터 베이스
         fun setMemo(memo: Memo) {
             itemplus = "${memo.ItemPlus}".toInt()
-            itemView.todoList.text = "${memo.Text}"
+            itemView.todoList.text="${memo.Text}"
+            itemView.position.text = "${memo.ItemPlus}"
             color = "${memo.Color}".toInt()
             val mGradientDrawable = itemView.rectangle.background as GradientDrawable
             mGradientDrawable.setStroke(8, colorjava.getColor(color)!!) //Color
@@ -138,6 +165,8 @@ class TodoAdapter() :
         var parentTodo: View
         var todoList: TextView
         var updateBtn : ImageButton
+        var deleteBtn : ImageButton
+        var position : TextView
 
         init {
 
@@ -145,6 +174,8 @@ class TodoAdapter() :
             todoList = itemView.findViewById(R.id.todoList)
             parentTodo = itemView.findViewById(R.id.parentTodo)
             updateBtn = itemView.findViewById(R.id.updatebtn)
+            deleteBtn = itemView.findViewById(R.id.deletebtn)
+            position = itemView.findViewById(R.id.position)
         }
     }
 
