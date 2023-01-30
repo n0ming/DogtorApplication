@@ -32,9 +32,6 @@ class MydogWriteActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        binding.backBtn.setOnClickListener{
-            finish()
-        }
 
         /*
         // 강아지 이름 가져오기

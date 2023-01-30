@@ -10,13 +10,16 @@ import com.example.dogtorapplication.recycler.DogRecyclerItemAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.fragment_my.view.*
 
-lateinit var db : FirebaseFirestore
-private lateinit var auth: FirebaseAuth
-
-private lateinit var binding : ActivityMydogBinding
 
 class MydogActivity : AppCompatActivity() {
+
+    lateinit var db : FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var binding : ActivityMydogBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMydogBinding.inflate(layoutInflater)
@@ -25,16 +28,17 @@ class MydogActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
+
         binding.backBtn.setOnClickListener{
             finish()
         }
+
 
         binding.retouch.setOnClickListener{
             val intent = Intent(this,MydogWriteActivity::class.java)
             startActivity(intent)
         }
 
-        Log.w("kkkk","2")
         // 회원의 정보 가져오기
         db.collection("doginfo")
             .orderBy("date",Query.Direction.DESCENDING) // 날짜 기준 내림차순으로

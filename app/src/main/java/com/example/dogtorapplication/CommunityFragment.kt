@@ -40,8 +40,10 @@ class CommunityFragment : Fragment() {
         mBinding.logo.setOnClickListener {
             mActivity.transaction(1)
         }
+
         mBinding.mytransaction.setOnClickListener {
-            mActivity.transaction(2)
+            val intent = Intent(activity, MydogActivity::class.java)
+            startActivity(intent)
         }
 
         // 글 쓰는 버튼 클릭 시 화면 전환
