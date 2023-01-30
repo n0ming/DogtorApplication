@@ -107,7 +107,7 @@ class CareFragment : DialogFragment(), OnItemListener {
         //val aaa = inflater.inflate(R.layout.test,container,false)
         monthYearText = v2?.findViewById<TextView>(R.id.monthYearText) as TextView
         recyclerView = v2?.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        recyclerView3 = v3.findViewById(R.id.recyclerView3) as RecyclerView
+        //recyclerView3 = v3.findViewById(R.id.recyclerView3) as RecyclerView
         //recyclerView2 = v2.findViewById<RecyclerView>(R.id.recycleView2)as RecyclerView
         //db 할때 사용할 것들들
         todoList = layout_todo.findViewById(R.id.todoList)
@@ -276,6 +276,10 @@ class CareFragment : DialogFragment(), OnItemListener {
             adapter.listDate.clear()
             adapter.listDate.addAll(dbHelper!!.selectMemo())
             adapter.notifyDataSetChanged()
+        } else if(id==3){
+            if(listsize!!>0){
+                Calendar().buf_view22?.findViewById<ImageView>(R.id.todo1)?.setVisibility(View.VISIBLE)
+            }
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -291,9 +295,9 @@ class CareFragment : DialogFragment(), OnItemListener {
         val manager: RecyclerView.LayoutManager =
             GridLayoutManager(ct, 3)
         Log.d("메모", "set here4")
-        recyclerView3!!.layoutManager = manager
+        //recyclerView3!!.layoutManager = manager
         Log.d("메모", "set here5")
-        recyclerView3!!.adapter = adapter
+        //recyclerView3!!.adapter = adapter
         Log.d("메모", "set here6")
     }
 
@@ -430,7 +434,6 @@ class CareFragment : DialogFragment(), OnItemListener {
                 recyclerView3?.adapter = dotadpater
                 recyclerView3?.layoutManager = GridLayoutManager(ct,3)
                 //Calendar().buf_view2?.findViewById<RecyclerView>(R.id.recyclerView3).
-
                 Log.d("DBTABLE", "${Main().input2}")
                 dbHelper = MyDBHelper(ct, Main().input2)
                 val content = dialog.editMemo.text.toString()
