@@ -28,6 +28,9 @@ class LoginActivity : AppCompatActivity() {
     // 로그인 인증을 위한 객체 획득
     private lateinit var auth: FirebaseAuth
 
+    // 구글 인증 이메일 받아오기 위한 변수 및 함수 선언
+    var email: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -37,17 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth // 객체 정의
 
-        // 구글 인증 이메일 받아오기 위한 변수 및 함수 선언
-        var email: String? = null
-        fun checkAuth():Boolean{
-            val currentUser = auth.currentUser
-            return currentUser?.let{
-                email = currentUser.email
-                currentUser.isEmailVerified
-            } ?: let{
-                false
-            }
-        }
+
 
         // 로그인 버튼 클릭 시 로그인 정보 확인
         binding.loginImageButton.setOnClickListener {
@@ -60,10 +53,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(nextIntent)
         }
 
+
         val requestLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         {
-            //구글 로그인 결과 처리
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
@@ -75,6 +68,8 @@ class LoginActivity : AppCompatActivity() {
                             // 구글 로그인 성공
                             email = account.email
                             moveMainPage(task.result?.user) // moveMainPage 함수를 통해 메인 화면으로 넘어가기
+                            Toast.makeText(this,"login_success", Toast.LENGTH_LONG).show()
+
 
                         } else {
                             Toast.makeText(this,task.exception?.message, Toast.LENGTH_LONG).show()
@@ -95,12 +90,14 @@ class LoginActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
-            // 구글의 인증 관리 앱 실행
+            // 인증 관리 앱 실행
             val signInIntent = GoogleSignIn.getClient(this, gso).signInIntent
             requestLauncher.launch(signInIntent)
         }
 
     }
+
+    // 구글 인증 처리
 
     // 앱이 종료 후 다시 시작 시 로그인 유지 될 수 있도록
     public override fun onStart() {

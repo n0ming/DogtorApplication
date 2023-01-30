@@ -43,8 +43,17 @@ class Signup01Activity : AppCompatActivity() {
             .addOnCompleteListener(this) {
                     task ->
                 if(task.isSuccessful){ // 생성이 되었다면
-                    //Login
-                    Toast.makeText(this,"로그인이 완료 되었습니다. My에서 내정보를 설정해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+                    auth.currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener { sendTask ->
+                            if(sendTask.isSuccessful){
+                                Toast.makeText(this,"가입이 완료 되었습니다. My에서 내정보를 설정해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+                            }
+                            else{
+                                Toast.makeText(this,"메일 전송에 실패하였습니다. 유효한 이메일로 다시 가입해주세요", Toast.LENGTH_LONG).show() // 토스트 메세지 띄우기
+
+                            }
+
+                        }
 
                     val nextIntent = Intent(this, LoginActivity::class.java)
                     startActivity(nextIntent)
