@@ -30,7 +30,8 @@ class WriteActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var db : FirebaseFirestore
     lateinit var storage : FirebaseStorage
-
+    lateinit var local:String
+    lateinit var name:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,17 +57,32 @@ class WriteActivity : AppCompatActivity() {
         }
 
         binding.finish.setOnClickListener {
-            if( binding.imageView2.drawable !== null && binding.etCategory.text.isNotEmpty()&& binding.etTitle.text.isNotEmpty()&& binding.etContent.text.isNotEmpty()){
+            if (binding.imageView2.drawable !== null && binding.etCategory.text.isNotEmpty() && binding.etTitle.text.isNotEmpty() && binding.etContent.text.isNotEmpty()) {
                 //store 에 먼저 데이터를 저장후 document id 값으로 업로드 파일 이름 지정
                 saveStore()
 
-            }else if(binding.imageView2.drawable == null) {
+            } else if (binding.imageView2.drawable == null) {
                 Toast.makeText(this, "사진을 업로드 해주세요.", Toast.LENGTH_SHORT).show()
-            }
-            else{
+            } else {
                 Toast.makeText(this, "데이터를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
-
             }
+
+            // 회원의 정보 가져오기
+            db.collection("userplus")
+                .whereEqualTo("userID", auth.uid.toString())
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        var userDTO = document.toObject(userplusImformation::class.java)
+                        local = userDTO.local.toString()
+                        name = userDTO.userName.toString()
+
+                    }
+
+                    if (local==null || name == null) {
+                        Toast.makeText(this, "내정보에서 정보를 입력 후 사용해주세요!.", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
         binding.etCategory.setOnClickListener(View.OnClickListener { v ->
