@@ -278,7 +278,6 @@ class CareFragment : DialogFragment(), OnItemListener {
             adapter.notifyDataSetChanged()
         } else if(id==3){
             if(listsize!!>0){
-                Calendar().buf_view22?.findViewById<ImageView>(R.id.todo1)?.setVisibility(View.VISIBLE)
             }
         }
     }

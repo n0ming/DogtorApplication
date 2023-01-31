@@ -42,8 +42,8 @@ class CalendarAdapter( var dayList: ArrayList<String>, private val onItemListene
     var dot : Boolean = true
     var viewsList= ArrayList<View>()
     fun a(): View? {
-            return buf_view
-        }
+        return buf_view
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -74,7 +74,7 @@ class CalendarAdapter( var dayList: ArrayList<String>, private val onItemListene
         holder.itemView.setOnClickListener {
             onItemListener.onItemClick(day)
             //색깔 변경 추가
-           if (check == 0) {
+            if (check == 0) {
                 holder.parentView.setBackgroundResource(R.drawable.edge_blue)
                 check = 1
                 buff2 = position;
@@ -115,7 +115,7 @@ class CalendarAdapter( var dayList: ArrayList<String>, private val onItemListene
 
     //viewsList를 공유하던가 추가 버튼후에 아래 명령어가 실행되게 신호를 주는 방법을 알아봐야함!!!!!!!!
 
-object MyJavaClass {
+    object MyJavaClass {
         fun area(text: String) {
             var text = text
             text = text
@@ -131,13 +131,11 @@ object MyJavaClass {
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dayText: TextView
         var parentView: View
-        var dot : ImageView
         //var recy3 : RecyclerView
 
         init {
             dayText = itemView.findViewById(R.id.dayText)
             parentView = itemView.findViewById(R.id.parentView)
-            dot = itemView.findViewById(R.id.todo1)
             //recy3 = itemView.findViewById(R.id.recyclerView3)
         }
     }
@@ -151,4 +149,3 @@ object MyJavaClass {
 
 
 }
-
