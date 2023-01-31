@@ -25,19 +25,13 @@ class MyDBHelper (
     }
 
     fun insertMemo(memo: Memo){
-        // db 가져오기
         val wd = writableDatabase
-        //wd.execSQL("INSERT INTO memo VALUES ('" + memo.ItemPlus.toString()+"',"+memo.Color.toString()+","+memo.Text.toString()+");")
-        //Memo를 입력타입으로 변환
         val values = ContentValues()
         values.put("ItemPlus",memo.ItemPlus)
         values.put("Color",memo.Color)
         values.put("Text",memo.Text)
         values.put("Text2",memo.Text2)
-
-        //db에 넣기
         wd.insert("memo", null,values)
-        //db닫기
         wd.close()
     }
 
@@ -48,7 +42,7 @@ class MyDBHelper (
 
         val select = "select * from memo" // content
         val rd = readableDatabase
-        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        val cursor = rd.rawQuery(select, null)
         while(cursor.moveToNext()){
             val itemcolor = cursor.getInt(0)
             val text = cursor.getString(2)
@@ -63,11 +57,11 @@ class MyDBHelper (
     }
     fun selectText(num : Int) : String{
         Log.d("num","$num")
-        val select = "select * from memo where ItemPlus = $num" // content
+        val select = "select * from memo where ItemPlus = $num"
         val rd = readableDatabase
         var text = "NAME"
         var memo : Memo = Memo(0,0,"","")
-        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        val cursor = rd.rawQuery(select, null)
         while(cursor.moveToNext()){
             text = cursor.getString(2)
 
@@ -78,11 +72,11 @@ class MyDBHelper (
     }
     fun selectText2(num : Int) : String{
         Log.d("num","$num")
-        val select = "select * from memo where ItemPlus = $num" // content
+        val select = "select * from memo where ItemPlus = $num"
         val rd = readableDatabase
         var text = "NAME"
         var memo : Memo = Memo(0,0,"","")
-        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        val cursor = rd.rawQuery(select, null)
         while(cursor.moveToNext()){
             text = cursor.getString(3)
 
@@ -97,7 +91,7 @@ class MyDBHelper (
         val rd = readableDatabase
         var color = 0
         var memo : Memo = Memo(0,0,"","")
-        val cursor = rd.rawQuery(select, null) // 위 sql과 다르게 반환값 존재
+        val cursor = rd.rawQuery(select, null)
         while(cursor.moveToNext()){
             color = cursor.getInt(1)
 
@@ -106,8 +100,7 @@ class MyDBHelper (
         rd.close()
         return color
     }
-    //아직 check 추가 안함
-    //데이터 수정 함수
+
     fun updateMemo(memo: Memo,num: Int){
         val wd = writableDatabase
 
@@ -123,9 +116,6 @@ class MyDBHelper (
     //데이터 삭제함수
     fun deleteMemo(num: Int){
         val wd = writableDatabase
-        //val delete = "delete from memo where no = ${memo.no}"
-        //wd.execSQL(delete)
-
         wd.delete("memo","ItemPlus=${num}",null)
         wd.close()
     }

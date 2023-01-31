@@ -36,19 +36,7 @@ class MydogWriteActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
 
-        /*
-        // 강아지 이름 가져오기
-        db.collection("userplus")
-            .whereEqualTo("userID",auth.uid.toString())
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    var userDTO = document.toObject(userplusImformation::class.java)
-                    binding.tv1.text = userDTO.dogName.toString()
-                }
-            }
 
-         */
 
         binding.done.setOnClickListener {
             if( binding.tv2.text.isNotEmpty()&& binding.tv4.text.isNotEmpty()&& binding.tv6.text.isNotEmpty()&& binding.tv8.text.isNotEmpty()){
@@ -100,12 +88,9 @@ class MydogWriteActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener {// 실패
-                            Log.w("kkkkk", "data save error", it)
+                            Log.w("kk", "data save error", it)
                         }
                 }
-            }
-            .addOnFailureListener { exception->
-                Log.w("wwww","wer",exception)
             }
     }
 

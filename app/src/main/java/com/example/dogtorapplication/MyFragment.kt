@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_my.view.*
 
 class MyFragment : Fragment() {
 
 
     // 파이어 베이스 인증 및 데이터 사용 위한 객체
+    var db : FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     val userEmail= auth?.currentUser?.email.toString() // 로그인한 이메일을 불러오기
 
@@ -38,10 +40,26 @@ class MyFragment : Fragment() {
             mActivity.transaction(1)
         }
 
+
         // 강아지 수술 등록
         view.mydogimageView.setOnClickListener {
-            val intent = Intent(activity, MydogActivity::class.java)
-            startActivity(intent)
+            db.collection("userplus")
+                .whereEqualTo("userID",auth.uid.toString())
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        var userDTO = document.toObject(userplusImformation::class.java)
+
+                        if(userDTO.dogName == null){
+                            Toast.makeText(requireActivity(), "내정보 입력 후 사용해주세요", Toast.LENGTH_LONG).show()
+                        }
+                        else{
+
+                            val intent = Intent(activity, MydogActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
         }
 
         myInf.setOnClickListener {// 내정보 버튼 클릭 시 이동

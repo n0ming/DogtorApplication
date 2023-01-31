@@ -78,10 +78,6 @@ class WriteActivity : AppCompatActivity() {
                         name = userDTO.userName.toString()
 
                     }
-
-                    if (local==null || name == null) {
-                        Toast.makeText(this, "내정보에서 정보를 입력 후 사용해주세요!.", Toast.LENGTH_SHORT).show()
-                    }
                 }
         }
 
@@ -123,7 +119,6 @@ class WriteActivity : AppCompatActivity() {
     }
 
     private fun saveStore(){
-        // 파이어 베이스에 글을 저장하기 위해 호출되는 함수
 
         // 회원의 정보 가져오기
         db.collection("userplus")
@@ -132,6 +127,7 @@ class WriteActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for (document in documents){
                     var userDTO = document.toObject(userplusImformation::class.java)
+
 
                     // 저장할 데이터
                     val data = mapOf(
@@ -151,9 +147,6 @@ class WriteActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             // 스토리지에 데이터 저장 후 id값으로 스토리지에 이미지 업로드
                             uploadImage(it.id)
-                        }
-                        .addOnFailureListener {// 실패
-                            Log.w("lee", "data save error", it)
                         }
                 }
             }

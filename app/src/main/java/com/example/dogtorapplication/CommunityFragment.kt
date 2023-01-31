@@ -7,19 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogtorapplication.databinding.FragmentCommunityBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.fragment_my.view.*
 
 class CommunityFragment : Fragment() {
 
 
     lateinit var db : FirebaseFirestore
     lateinit var storage : FirebaseStorage
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var mBinding : FragmentCommunityBinding
 
@@ -32,6 +36,7 @@ class CommunityFragment : Fragment() {
 
         db = FirebaseFirestore.getInstance()
         storage = Firebase.storage
+        auth = FirebaseAuth.getInstance()
 
         // 메인 액티비티의 함수 사용하기 위해 메인 액티비티 받아오기
         val mActivity = activity as MainActivity
@@ -41,15 +46,45 @@ class CommunityFragment : Fragment() {
             mActivity.transaction(1)
         }
 
+        // 강아지 수술 등록
         mBinding.mytransaction.setOnClickListener {
-            val intent = Intent(activity, MydogActivity::class.java)
-            startActivity(intent)
+            db.collection("userplus")
+                .whereEqualTo("userID",auth.uid.toString())
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        var userDTO = document.toObject(userplusImformation::class.java)
+
+                        if(userDTO.dogName == null){
+                            Toast.makeText(requireActivity(), "내정보 입력 후 사용해주세요", Toast.LENGTH_LONG).show()
+                        }
+                        else{
+
+                            val intent = Intent(activity, MydogActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
         }
 
         // 글 쓰는 버튼 클릭 시 화면 전환
         mBinding.addwrite.setOnClickListener {
-            val intent = Intent(activity, WriteActivity::class.java)
-            startActivity(intent)
+            db.collection("userplus")
+                .whereEqualTo("userID",auth.uid.toString())
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        var userDTO = document.toObject(userplusImformation::class.java)
+
+                        if(userDTO.dogName == null){
+                            Toast.makeText(requireActivity(), "내정보 입력 후 사용해주세요", Toast.LENGTH_LONG).show()
+                        }
+                        else{
+                            val intent = Intent(activity, WriteActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
         }
 
         // 처음에 뜨는 화면은 전체 카테고리라서 버튼 클릭 상태로 설정
